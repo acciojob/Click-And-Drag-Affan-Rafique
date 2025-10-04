@@ -69,6 +69,8 @@
     const walk = (x - startX) * 2; // scroll speed factor
     slider.scrollLeft = scrollLeft - walk;
   });
+	cy.get('.items').scrollTo('right', { ensureScrollable: false })
+cy.get('.items').invoke('scrollLeft').should('be.gt', 0)
 </script>
 
   </body>
