@@ -36,6 +36,39 @@
 
 <script>
 //Your code goes here 
+	const slider = document.querySelector('.items');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  // Mouse down -> start dragging
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  // Mouse leave -> stop dragging
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  // Mouse up -> stop dragging
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  // Mouse move -> scroll horizontally
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return; // do nothing if not dragging
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2; // scroll speed factor
+    slider.scrollLeft = scrollLeft - walk;
+  });
 </script>
 
   </body>
